@@ -1,0 +1,26 @@
+#:import dp kivy.metrics.dp
+
+<DishesScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(12)
+        padding: dp(16), dp(16), dp(16), dp(16)
+        size_hint: 1, 1
+
+        MDScrollView:
+            size_hint: 1, 1
+
+            MDList:
+                id: dishes_list
+
+        MDButton:
+            style: "filled"
+            size_hint_y: None
+            height: dp(44)
+            on_release:
+                root.open_add_dish()
+
+            MDButtonText:
+                text: "Dodaj danie"

@@ -1,0 +1,146 @@
+#:import dp kivy.metrics.dp
+
+<DishFormScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(16), dp(16), dp(16), dp(16)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Nazwa dania"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: name_field
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Krótki opis"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: description_field
+                mode: "outlined"
+                multiline: True
+                size_hint_y: None
+                height: dp(90)
+
+            MDLabel:
+                text: "Przepis"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: recipe_field
+                mode: "outlined"
+                multiline: True
+                size_hint_y: None
+                height: dp(180)
+
+            MDLabel:
+                text: "Link do tutorialu YouTube"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: youtube_field
+                mode: "outlined"
+                hint_text: "https://..."
+                size_hint_y: None
+                height: dp(48)
+
+            MDButton:
+                style: "filled"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.save_dish()
+
+                MDButtonText:
+                    text: "Zapisz danie"
+
+            MDLabel:
+                text: "Składniki dania"
+                bold: True
+                halign: "left"
+                size_hint_y: None
+                height: dp(24)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(8)
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDList:
+                    id: ingredients_list
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(8)
+                padding: dp(10)
+                size_hint_y: None
+                height: dp(270) if root.product_picker_visible else 0
+                opacity: 1 if root.product_picker_visible else 0
+                disabled: not root.product_picker_visible
+
+                MDTextField:
+                    id: product_search_field
+                    mode: "outlined"
+                    hint_text: "Szukaj produktu po nazwie..."
+                    size_hint_y: None
+                    height: dp(48)
+                    on_text:
+                        root.filter_products(self.text)
+
+                MDScrollView:
+                    do_scroll_x: False
+                    size_hint_y: 1
+
+                    MDList:
+                        id: product_search_list
+
+                MDButton:
+                    style: "text"
+                    size_hint_y: None
+                    height: dp(40)
+                    on_release:
+                        root.close_product_picker()
+
+                    MDButtonText:
+                        text: "Anuluj wybór"
+
+            MDButton:
+                style: "text"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.open_details()
+
+                MDButtonText:
+                    text: "Przejdź do szczegółów"
+
+            MDButton:
+                style: "text"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.cancel()
+
+                MDButtonText:
+                    text: "Anuluj"

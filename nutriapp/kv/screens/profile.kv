@@ -1,0 +1,339 @@
+#:import dp kivy.metrics.dp
+
+<ProfileScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(8)
+            padding: dp(16), dp(16), dp(16), dp(16)
+            size_hint_y: None
+            height: self.minimum_height
+
+            # ========== DANE OSOBOWE I AKTYWNOŚĆ ==========
+
+            MDLabel:
+                text: "Dane osobowe i aktywność"
+                halign: "left"
+                size_hint_y: None
+                height: dp(32)
+
+            MDLabel:
+                text: "Imię (opcjonalne)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: name_field
+                hint_text: "np. Wojtek"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Płeć"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: sex_field
+                hint_text: "Mężczyzna / Kobieta"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_sex_menu()
+
+            MDLabel:
+                text: "Wiek [lata]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: age_field
+                hint_text: "np. 24"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Wzrost [cm]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: height_field
+                hint_text: "np. 180"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Masa ciała [kg]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: weight_field
+                hint_text: "np. 80"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Poziom aktywności"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: activity_field
+                hint_text: "Niska / Lekka / Średnia / Wysoka / Bardzo wysoka"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_activity_menu()
+
+            MDLabel:
+                text: "Cel (tylko dla trybów automatycznych)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: goal_field
+                hint_text: "Utrzymanie / Redukcja / Masa"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_goal_menu()
+
+            # ========== USTAWIENIA KALORII ==========
+
+            MDLabel:
+                text: "Ustawienia kalorii"
+                halign: "left"
+                size_hint_y: None
+                height: dp(32)
+
+            MDLabel:
+                text: "Tryb kalorii"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: calorie_mode_field
+                hint_text: "Wybierz tryb kalorii"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_calorie_mode_menu()
+
+            MDLabel:
+                text: "Algorytm na kcal"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) in ("auto", "auto_per_kg") else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) in ("auto", "auto_per_kg") else True
+
+            MDTextField:
+                id: calorie_algorithm_field
+                hint_text: "Wybierz algorytm"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_calorie_algorithm_menu()
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) in ("auto", "auto_per_kg") else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) in ("auto", "auto_per_kg") else True
+
+            MDLabel:
+                text: "Ręczne kcal (dziennie)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) == "manual" else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) == "manual" else True
+
+            MDTextField:
+                id: manual_calories_field
+                hint_text: "np. 2500"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) == "manual" else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) == "manual" else True
+
+            MDLabel:
+                text: "Korekta kcal (deficyt/nadwyżka)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) == "auto_per_kg" else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) == "auto_per_kg" else True
+
+            MDTextField:
+                id: calorie_adjustment_field
+                hint_text: "np. -100 lub 200"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._calorie_mode_value(calorie_mode_field.text) == "auto_per_kg" else 0
+                disabled: False if root._calorie_mode_value(calorie_mode_field.text) == "auto_per_kg" else True
+
+            # ========== USTAWIENIA MAKRO ==========
+
+            MDLabel:
+                text: "Ustawienia makro"
+                halign: "left"
+                size_hint_y: None
+                height: dp(32)
+
+            MDLabel:
+                text: "Tryb makro"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: macro_mode_field
+                hint_text: "Wybierz tryb makro"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_focus:
+                    if self.focus: root.open_macro_mode_menu()
+
+            MDLabel:
+                text: "Białko [g/kg]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDTextField:
+                id: protein_g_per_kg_field
+                hint_text: "np. 1.6"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDLabel:
+                text: "Tłuszcz [g/kg]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDTextField:
+                id: fat_g_per_kg_field
+                hint_text: "np. 1.0"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDLabel:
+                text: "Węglowodany [g/kg] (opcjonalnie)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDTextField:
+                id: carbs_g_per_kg_field
+                hint_text: "np. 3.0 lub zostaw puste"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "per_kg" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "per_kg" else True
+
+            MDLabel:
+                text: "Białko [g] (ręcznie)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            MDTextField:
+                id: manual_protein_field
+                hint_text: "np. 160"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            MDLabel:
+                text: "Tłuszcz [g] (ręcznie)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            MDTextField:
+                id: manual_fat_field
+                hint_text: "np. 80"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            MDLabel:
+                text: "Węglowodany [g] (ręcznie)"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            MDTextField:
+                id: manual_carbs_field
+                hint_text: "np. 250"
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                opacity: 1 if root._macro_mode_value(macro_mode_field.text) == "manual" else 0
+                disabled: False if root._macro_mode_value(macro_mode_field.text) == "manual" else True
+
+            # ========== ZAPIS I PODSUMOWANIE ==========
+
+            MDButton:
+                style: "filled"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.save_profile()
+
+                MDButtonText:
+                    text: "Zapisz profil i przelicz"
+
+            MDLabel:
+                id: summary_label
+                text: "Twoje cele: -"
+                halign: "center"
+                size_hint_y: None
+                height: dp(24)

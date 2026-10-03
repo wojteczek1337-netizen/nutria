@@ -1,0 +1,34 @@
+#:import dp kivy.metrics.dp
+
+MDBoxLayout:
+    orientation: "vertical"
+    padding: 0.1, 0.1
+
+    MDTopAppBar:
+        id: top_bar
+        type: "small"
+        size_hint_y: None
+        height: dp(64) if app.topbar_visible else 0
+        opacity: 1 if app.topbar_visible else 0
+        disabled: not app.topbar_visible
+
+        MDTopAppBarLeadingButtonContainer:
+            MDActionTopAppBarButton:
+                icon: "arrow-left"
+                opacity: 1 if app.show_topbar_back else 0
+                disabled: not app.show_topbar_back
+                on_release:
+                    app.go_back()
+
+        MDTopAppBarTitle:
+            text: app.topbar_title if app.topbar_title else " "
+            halign: "left"
+
+        MDTopAppBarTrailingButtonContainer:
+            MDActionTopAppBarButton:
+                icon: "menu"
+                on_release:
+                    app.open_topbar_menu(self)
+
+    BoxLayout:
+        id: screen_container

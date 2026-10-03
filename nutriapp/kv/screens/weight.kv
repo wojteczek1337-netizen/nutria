@@ -1,0 +1,76 @@
+# nutriapp/kv/screens/weight.kv
+#:import dp kivy.metrics.dp
+
+<WeightScreen>:
+    name: "weight"
+    md_bg_color: self.theme_cls.backgroundColor
+
+    MDScrollView:
+        do_scroll_x: False
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(12)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Wykres wagi"
+                adaptive_height: True
+
+            MDBoxLayout:
+                id: chart_container
+                orientation: "vertical"
+                size_hint_y: None
+                height: dp(250)
+
+            MDLabel:
+                text: "Data pomiaru"
+                adaptive_height: True
+
+            MDTextField:
+                id: date_field
+                mode: "outlined"
+                hint_text: "Wybierz datę"
+                readonly: True
+                size_hint_y: None
+                height: dp(56)
+                on_touch_down:
+                    if self.collide_point(*args[1].pos): root.open_date_picker()
+
+            MDLabel:
+                text: "Waga"
+                adaptive_height: True
+
+            MDTextField:
+                id: weight_field
+                mode: "outlined"
+                hint_text: "Waga (kg)"
+                input_filter: "float"
+                size_hint_y: None
+                height: dp(56)
+
+            MDButton:
+                style: "filled"
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(48)
+                on_release: root.save_measurement()
+                MDButtonText:
+                    text: "Dodaj pomiar"
+
+            MDLabel:
+                id: profile_label
+                text: "Profil: brak pomiaru"
+                theme_text_color: "Secondary"
+                adaptive_height: True
+
+            MDLabel:
+                text: "Historia pomiarów"
+                adaptive_height: True
+
+            MDList:
+                id: history_list
+                size_hint_y: None
+                height: self.minimum_height

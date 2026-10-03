@@ -1,0 +1,113 @@
+#:import dp kivy.metrics.dp
+
+<ShoppingScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Lista zakupów"
+                bold: True
+                size_hint_y: None
+                height: dp(28)
+
+            MDButton:
+                style: "filled"
+                size_hint_y: None
+                height: dp(48)
+                on_release: root.open_range_picker()
+
+                MDButtonText:
+                    text: "Wybierz zakres z kalendarza"
+
+            MDLabel:
+                text: root.selected_range_text
+                size_hint_y: None
+                height: dp(28)
+                halign: "left"
+
+            MDButton:
+                style: "outlined"
+                size_hint_y: None
+                height: dp(48)
+                on_release: root.generate_list_from_calendar()
+
+                MDButtonText:
+                    text: "Generuj listę z kalendarza"
+
+            Widget:
+                size_hint_y: None
+                height: dp(8)
+
+            MDLabel:
+                text: "Zapisane listy"
+                bold: True
+                size_hint_y: None
+                height: dp(26)
+
+            MDBoxLayout:
+                id: lists_container
+                orientation: "vertical"
+                spacing: dp(5)
+                size_hint_y: None
+                height: self.minimum_height
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: dp(8)
+                size_hint_y: None
+                height: dp(44)
+
+                MDButton:
+                    style: "outlined"
+                    size_hint_x: 0.7
+                    size_hint_y: None
+                    height: dp(44)
+                    disabled: not root.has_selected_list
+                    on_release: root.open_manual_item_panel()
+
+                    MDButtonText:
+                        text: "Dodaj własną pozycję"
+
+                MDButton:
+                    style: "text"
+                    size_hint_x: 0.3
+                    size_hint_y: None
+                    height: dp(44)
+                    disabled: not root.has_selected_list
+                    on_release: root.remove_selected_list()
+
+                    MDButtonText:
+                        text: "Usuń listę"
+
+            MDBoxLayout:
+                id: manual_item_container
+                orientation: "vertical"
+                spacing: dp(6)
+                size_hint_y: None
+                height: self.minimum_height
+
+            Widget:
+                size_hint_y: None
+                height: dp(8)
+
+            MDLabel:
+                text: "Pozycje listy"
+                bold: True
+                size_hint_y: None
+                height: dp(26)
+
+            MDBoxLayout:
+                id: items_container
+                orientation: "vertical"
+                spacing: dp(5)
+                size_hint_y: None
+                height: self.minimum_height

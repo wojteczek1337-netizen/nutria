@@ -1,0 +1,197 @@
+#:import dp kivy.metrics.dp
+
+<ProductFormScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(16), dp(16), dp(16), dp(16)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Nazwa produktu"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: name_field
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Marka"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: brand_field
+                mode: "outlined"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Opis porcji / opakowania"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: quantity_text_field
+                mode: "outlined"
+                hint_text: "np. 1 sztuka / 350 g"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Waga [g]"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: quantity_g_field
+                mode: "outlined"
+                hint_text: "np. 350"
+                input_filter: "float"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Kalorie na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: energy_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 250"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Białko na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: protein_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 12.5"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Tłuszcz na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: fat_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 8.0"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Kwasy nasycone na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: saturated_fat_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 3.2"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Węglowodany na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: carbs_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 30.0"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Cukry na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: sugar_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 12.0"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Błonnik na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: fiber_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 6.5"
+                size_hint_y: None
+                height: dp(48)
+
+            MDLabel:
+                text: "Sól na 100 g"
+                halign: "left"
+                size_hint_y: None
+                height: dp(20)
+
+            MDTextField:
+                id: salt_field
+                mode: "outlined"
+                input_filter: "float"
+                hint_text: "np. 1.2"
+                size_hint_y: None
+                height: dp(48)
+
+            MDButton:
+                style: "filled"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.save_product()
+
+                MDButtonText:
+                    text: "Zapisz produkt"
+
+            MDButton:
+                style: "text"
+                size_hint_y: None
+                height: dp(44)
+                on_release:
+                    root.cancel()
+
+                MDButtonText:
+                    text: "Anuluj"

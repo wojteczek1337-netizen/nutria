@@ -1,0 +1,289 @@
+#:import dp kivy.metrics.dp
+
+<DietDetailsScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        size_hint: 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(12)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Szczegóły diety"
+                bold: True
+                size_hint_y: None
+                height: dp(26)
+
+            MDLabel:
+                text: "Nazwa diety:"
+                size_hint_y: None
+                height: dp(22)
+                halign: "left"
+
+            MDTextField:
+                id: diet_name_field
+                mode: "outlined"
+                text: root.diet_name
+                size_hint_y: None
+                height: dp(48)
+                on_text_validate:
+                    root.save_diet_name()
+
+            MDButton:
+                style: "text"
+                size_hint_y: None
+                height: dp(32)
+                on_release:
+                    root.save_diet_name()
+
+                MDButtonText:
+                    text: "Zapisz nazwę"
+
+            MDLabel:
+                text: "Ilość dni w cyklu:"
+                size_hint_y: None
+                height: dp(22)
+                halign: "left"
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: dp(40)
+                spacing: dp(8)
+
+                MDTextField:
+                    id: cycle_length_field
+                    mode: "outlined"
+                    text: str(root.cycle_length)
+                    input_filter: "int"
+                    size_hint_x: 0.7
+                    size_hint_y: None
+                    height: dp(40)
+                    on_text_validate:
+                        root.save_cycle_length()
+
+                MDButton:
+                    style: "text"
+                    size_hint_x: 0.3
+                    size_hint_y: None
+                    height: dp(40)
+                    on_release:
+                        root.save_cycle_length()
+
+                    MDButtonText:
+                        text: "Zapisz"
+
+            MDLabel:
+                text: "Opis:"
+                size_hint_y: None
+                height: dp(22)
+                halign: "left"
+
+            MDTextField:
+                id: description_field
+                mode: "outlined"
+                text: root.diet_description
+                multiline: True
+                size_hint_y: None
+                height: dp(72)
+
+            MDButton:
+                style: "text"
+                size_hint_y: None
+                height: dp(32)
+                on_release:
+                    root.save_description()
+
+                MDButtonText:
+                    text: "Zapisz opis"
+
+            Widget:
+                size_hint_y: None
+                height: dp(8)
+
+            # RAMKA DNIA
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(12)
+                spacing: dp(8)
+                size_hint_y: None
+                height: self.minimum_height
+
+                canvas.before:
+                    Color:
+                        rgba: 0.8, 0.8, 0.8, 1
+                    Line:
+                        rounded_rectangle: (self.x, self.y, self.width, self.height, dp(20))
+                        width: dp(1)
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(32)
+                    spacing: dp(12)
+
+                    MDButton:
+                        style: "text"
+                        size_hint_x: None
+                        width: dp(36)
+                        on_release:
+                            root.previous_day()
+
+                        MDButtonText:
+                            text: "<"
+
+                    MDLabel:
+                        id: day_label
+                        text: f"Dzień {root.current_day_number}"
+                        halign: "center"
+                        valign: "middle"
+
+                    MDButton:
+                        style: "text"
+                        size_hint_x: None
+                        width: dp(36)
+                        on_release:
+                            root.next_day()
+
+                        MDButtonText:
+                            text: ">"
+
+                MDButton:
+                    style: "text"
+                    size_hint_y: None
+                    height: dp(32)
+                    on_release:
+                        root.open_add_meal_panel()
+
+                    MDButtonText:
+                        text: "Dodaj posiłek +"
+
+                MDBoxLayout:
+                    id: add_meal_panel_container
+                    orientation: "vertical"
+                    spacing: dp(8)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                MDBoxLayout:
+                    id: day_meals_container
+                    orientation: "vertical"
+                    spacing: dp(4)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                MDLabel:
+                    text: "Makro:"
+                    size_hint_y: None
+                    height: dp(22)
+                    halign: "left"
+
+                MDLabel:
+                    text: root.day_macros_text
+                    halign: "left"
+                    valign: "top"
+                    size_hint_y: None
+                    height: dp(80)
+                    text_size: self.width, None
+
+            MDLabel:
+                text: "Średnie makro diety:"
+                size_hint_y: None
+                height: dp(24)
+                halign: "left"
+
+            MDLabel:
+                text: root.average_macros_text
+                halign: "left"
+                valign: "top"
+                size_hint_y: None
+                height: dp(80)
+                text_size: self.width, None
+
+            Widget:
+                size_hint_y: None
+                height: dp(12)
+
+            # Dół: liczba dni + startowy dzień + przyciski
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(40)
+                    spacing: dp(8)
+
+                    MDLabel:
+                        text: "Ilość dni planowanych w kalendarzu:"
+                        size_hint_x: 0.75
+                        halign: "left"
+                        valign: "middle"
+
+                    MDTextField:
+                        id: activate_days_field
+                        mode: "outlined"
+                        text: str(root.calendar_days)
+                        input_filter: "int"
+                        size_hint_x: 0.25
+                        size_hint_y: None
+                        height: dp(40)
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(40)
+                    spacing: dp(8)
+
+                    MDLabel:
+                        text: "Od którego dnia diety rozpocząć:"
+                        size_hint_x: 0.75
+                        halign: "left"
+                        valign: "middle"
+
+                    MDTextField:
+                        id: start_day_field
+                        mode: "outlined"
+                        text: str(root.start_day_number)
+                        input_filter: "int"
+                        size_hint_x: 0.25
+                        size_hint_y: None
+                        height: dp(40)
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(48)
+                    spacing: dp(8)
+
+                    MDButton:
+                        style: "filled"
+                        size_hint_x: 0.5
+                        size_hint_y: None
+                        height: dp(48)
+                        on_release:
+                            root.on_activate_button_pressed()
+
+                        MDButtonText:
+                            text: "Aktywuj dietę"
+
+                    MDButton:
+                        style: "outlined"
+                        size_hint_x: 0.5
+                        size_hint_y: None
+                        height: dp(48)
+                        opacity: 1 if root.is_active else 0
+                        disabled: False if root.is_active else True
+                        on_release:
+                            root.on_deactivate_button_pressed()
+
+                        MDButtonText:
+                            text: "Dezaktywuj dietę"

@@ -1,0 +1,235 @@
+#:import dp kivy.metrics.dp
+#:import CalorieRingChart nutriapp.widgets.charts.CalorieRingChart
+#:import MacroRingCard nutriapp.widgets.charts.MacroRingCard
+
+<HomeScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: [dp(8), dp(0), dp(8), dp(8)]
+        spacing: dp(0)
+
+        GridLayout:
+            cols: 2
+            rows: 2
+            spacing: dp(10), dp(28)
+            padding: [0, dp(4), 0, 0]
+            size_hint_y: None
+            height: dp(2 * 165 + 28)
+
+            # ---------- KCAL ----------
+
+            MacroRingCard:
+                title: "KCAL"
+                unit: "kcal"
+                size_hint: None, None
+                size: dp(150), dp(165)
+
+                MDLabel:
+                    text: "KCAL"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: dp(112)
+
+                    CalorieRingChart:
+                        id: kcal_ring
+                        size_hint: None, None
+                        size: dp(100), dp(100)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        target_calories: 0
+                        planned_calories: 0
+                        eaten_calories: 0
+
+                    MDLabel:
+                        id: kcal_center_label
+                        text: ""
+                        halign: "center"
+                        valign: "middle"
+                        size_hint: None, None
+                        size: dp(90), dp(36)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDLabel:
+                    id: kcal_plan_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(2)
+
+                MDLabel:
+                    id: kcal_plan_over_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+            # ---------- BIAŁKO ----------
+
+            MacroRingCard:
+                title: "Białko"
+                unit: "g"
+                size_hint: None, None
+                size: dp(150), dp(165)
+
+                MDLabel:
+                    text: "Białko"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: dp(112)
+
+                    CalorieRingChart:
+                        id: protein_ring
+                        size_hint: None, None
+                        size: dp(100), dp(100)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        target_calories: 0
+                        planned_calories: 0
+                        eaten_calories: 0
+
+                    MDLabel:
+                        id: protein_center_label
+                        text: ""
+                        halign: "center"
+                        valign: "middle"
+                        size_hint: None, None
+                        size: dp(90), dp(36)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDLabel:
+                    id: protein_plan_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(2)
+
+                MDLabel:
+                    id: protein_plan_over_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+            # ---------- TŁUSZCZ ----------
+
+            MacroRingCard:
+                title: "Tłuszcz"
+                unit: "g"
+                size_hint: None, None
+                size: dp(150), dp(165)
+
+                MDLabel:
+                    text: "Tłuszcz"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: dp(112)
+
+                    CalorieRingChart:
+                        id: fat_ring
+                        size_hint: None, None
+                        size: dp(100), dp(100)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        target_calories: 0
+                        planned_calories: 0
+                        eaten_calories: 0
+
+                    MDLabel:
+                        id: fat_center_label
+                        text: ""
+                        halign: "center"
+                        valign: "middle"
+                        size_hint: None, None
+                        size: dp(90), dp(36)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDLabel:
+                    id: fat_plan_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(2)
+
+                MDLabel:
+                    id: fat_plan_over_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+            # ---------- WĘGLOWODANY ----------
+
+            MacroRingCard:
+                title: "Węglowodany"
+                unit: "g"
+                size_hint: None, None
+                size: dp(150), dp(165)
+
+                MDLabel:
+                    text: "Węglowodany"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: dp(112)
+
+                    CalorieRingChart:
+                        id: carbs_ring
+                        size_hint: None, None
+                        size: dp(100), dp(100)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        target_calories: 0
+                        planned_calories: 0
+                        eaten_calories: 0
+
+                    MDLabel:
+                        id: carbs_center_label
+                        text: ""
+                        halign: "center"
+                        valign: "middle"
+                        size_hint: None, None
+                        size: dp(90), dp(36)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDLabel:
+                    id: carbs_plan_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(2)
+
+                MDLabel:
+                    id: carbs_plan_over_label
+                    text: ""
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(16)

@@ -1,0 +1,88 @@
+#:import dp kivy.metrics.dp
+
+<AuthScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(12)
+        padding: dp(24), dp(24), dp(24), dp(24)
+        size_hint: 1, 1
+
+        MDLabel:
+            id: mode_label
+            text: "Logowanie"
+            halign: "center"
+            theme_text_color: "Primary"
+            size_hint_y: None
+            height: dp(32)
+
+        MDLabel:
+            text: "Email"
+            halign: "left"
+            size_hint_y: None
+            height: dp(20)
+
+        MDTextField:
+            id: email_field
+            hint_text: "np. wojtek@example.com"
+            mode: "outlined"
+            size_hint_y: None
+            height: dp(48)
+
+        MDLabel:
+            text: "Hasło"
+            halign: "left"
+            size_hint_y: None
+            height: dp(20)
+
+        MDTextField:
+            id: password_field
+            hint_text: "Hasło"
+            mode: "outlined"
+            password: True
+            size_hint_y: None
+            height: dp(48)
+
+        MDLabel:
+            text: "Imię / nick (opcjonalnie)"
+            halign: "left"
+            size_hint_y: None
+            height: dp(20)
+
+        MDTextField:
+            id: name_field
+            hint_text: "np. Wojtek"
+            mode: "outlined"
+            size_hint_y: None
+            height: dp(48)
+
+        MDButton:
+            id: submit_button
+            style: "filled"
+            size_hint_y: None
+            height: dp(44)
+            on_release:
+                root.submit()
+
+            MDButtonText:
+                id: submit_button_text
+                text: "Zaloguj"
+
+        MDButton:
+            style: "outlined"
+            size_hint_y: None
+            height: dp(44)
+            on_release:
+                root.switch_mode()
+
+            MDButtonText:
+                text: "Przełącz logowanie/rejestrację"
+
+        MDLabel:
+            id: status_label
+            text: ""
+            halign: "center"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: dp(24)
