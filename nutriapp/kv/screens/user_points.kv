@@ -1,6 +1,6 @@
 #:import dp kivy.metrics.dp
 
-<UsersScreen>:
+<UserPointsScreen>:
     md_bg_color: app.theme_cls.backgroundColor
 
     MDScrollView:
@@ -14,12 +14,17 @@
             height: self.minimum_height
 
             MDLabel:
-                text: "Punkty za trafienie w dzienny cel"
+                id: summary_label
+                text: "Suma: 0 punktów"
                 adaptive_height: True
 
-            MDBoxLayout:
-                id: users_list
-                orientation: "vertical"
-                spacing: dp(8)
+            MDLabel:
+                id: hint_label
+                text: ""
+                theme_text_color: "Secondary"
+                adaptive_height: True
+
+            MDList:
+                id: days_list
                 size_hint_y: None
                 height: self.minimum_height

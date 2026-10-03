@@ -26,6 +26,10 @@ def get_user_by_email(session: Session, email: str) -> User | None:
     return session.query(User).filter(User.email == email).first()
 
 
+def get_user_by_id(session: Session, user_id: int) -> User | None:
+    return session.query(User).filter(User.id == user_id).first()
+
+
 def list_users(session: Session) -> list[User]:
     return session.query(User).order_by(User.id).all()
 

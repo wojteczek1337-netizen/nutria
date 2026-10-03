@@ -20,6 +20,7 @@ import nutriapp.models.daily_target
 import nutriapp.models.diet_plan
 import nutriapp.models.shopping_list
 import nutriapp.models.weight
+import nutriapp.models.daily_points
 
 
 class NutriApp(MDApp):
@@ -29,6 +30,7 @@ class NutriApp(MDApp):
     show_topbar_back = BooleanProperty(False)
     selected_product_id = NumericProperty(0)
     selected_dish_id = NumericProperty(0)
+    selected_points_user_id = NumericProperty(0)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -58,6 +60,7 @@ class NutriApp(MDApp):
             "shopping": "Lista zakupów",
             "weight": "Pomiary wagi",
             "users": "Użytkownicy",
+            "user_points": "Punkty",
         }
 
         self.topbar_destinations = [
@@ -118,6 +121,9 @@ class NutriApp(MDApp):
 
         print("DEBUG APP: loading nutriapp/kv/screens/users.kv")
         Builder.load_file("nutriapp/kv/screens/users.kv")
+
+        print("DEBUG APP: loading nutriapp/kv/screens/user_points.kv")
+        Builder.load_file("nutriapp/kv/screens/user_points.kv")
 
         print("DEBUG APP: creating screen manager")
         screen_manager = create_root_widget()
