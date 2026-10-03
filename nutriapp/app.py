@@ -6,7 +6,8 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty, BooleanProperty, ListProperty, NumericProperty
 
 from nutriapp.navigation import create_root_widget
-from nutriapp.data.database import Base, engine
+from nutriapp.data.database import prepare_database
+from nutriapp.data.migrate_sqlite import migrate_sqlite_if_empty
 
 # MODELE – wszystkie muszą być zaimportowane przed create_all()
 import nutriapp.models.user
@@ -130,7 +131,8 @@ class NutriApp(MDApp):
 
     def on_start(self):
         print("DEBUG APP: on_start()")
-        Base.metadata.create_all(bind=engine)
+        prepare_database()
+        migrate_sqlite_if_empty()
 
     def set_topbar(
         self,
