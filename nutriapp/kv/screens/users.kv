@@ -1,0 +1,23 @@
+#:import dp kivy.metrics.dp
+
+<UsersScreen>:
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDScrollView:
+        do_scroll_x: False
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(12)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Konta zapisane w bazie"
+                adaptive_height: True
+
+            MDList:
+                id: users_list
+                size_hint_y: None
+                height: self.minimum_height

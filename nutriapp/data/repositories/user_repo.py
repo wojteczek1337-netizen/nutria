@@ -26,6 +26,10 @@ def get_user_by_email(session: Session, email: str) -> User | None:
     return session.query(User).filter(User.email == email).first()
 
 
+def list_users(session: Session) -> list[User]:
+    return session.query(User).order_by(User.id).all()
+
+
 def create_user(session: Session, email: str, raw_password: str, display_name: str | None) -> User:
     """Tworzy użytkownika, jeśli jeszcze nie istnieje. Zwraca obiekt User."""
     user = get_user_by_email(session, email=email)

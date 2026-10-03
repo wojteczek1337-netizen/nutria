@@ -57,6 +57,7 @@ class NutriApp(MDApp):
             "diet_details": "Szczegóły diety",
             "shopping": "Lista zakupów",
             "weight": "Pomiary wagi",
+            "users": "Użytkownicy",
         }
 
         self.topbar_destinations = [
@@ -68,6 +69,7 @@ class NutriApp(MDApp):
             ("diets", "Diety"),
             ("shopping", "Lista zakupów"),
             ("weight", "Pomiary wagi"),
+            ("users", "Użytkownicy"),
         ]
 
     def build(self):
@@ -113,6 +115,9 @@ class NutriApp(MDApp):
 
         print("DEBUG APP: loading nutriapp/kv/screens/weight.kv")
         Builder.load_file("nutriapp/kv/screens/weight.kv")
+
+        print("DEBUG APP: loading nutriapp/kv/screens/users.kv")
+        Builder.load_file("nutriapp/kv/screens/users.kv")
 
         print("DEBUG APP: creating screen manager")
         screen_manager = create_root_widget()

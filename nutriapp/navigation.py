@@ -15,6 +15,7 @@ from nutriapp.screens.diets import DietListScreen
 from nutriapp.screens.diet_details import DietDetailsScreen
 from nutriapp.screens.shopping import ShoppingScreen
 from nutriapp.screens.weight import WeightScreen
+from nutriapp.screens.users import UsersScreen
 
 
 def create_root_widget() -> ScreenManager:
@@ -33,5 +34,6 @@ def create_root_widget() -> ScreenManager:
     sm.add_widget(DietDetailsScreen(name="diet_details"))
     sm.add_widget(ShoppingScreen(name="shopping"))
     sm.add_widget(WeightScreen(name="weight"))
+    sm.add_widget(UsersScreen(name="users"))
     sm.current = "auth"
     return sm
